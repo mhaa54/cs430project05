@@ -1,8 +1,6 @@
 /*
  */
 
-precision lowp float;
-
 uniform sampler2D decal;
 varying vec2 myTexCoord;
 
