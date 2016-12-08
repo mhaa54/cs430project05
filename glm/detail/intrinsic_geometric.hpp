@@ -12,10 +12,6 @@
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
 /// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
-/// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,35 +21,54 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/intrinsic_geometric.hpp
+/// @date 2009-05-08 / 2011-06-15
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
+#pragma once
 
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
+#include "setup.hpp"
 
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
+#if(!(GLM_ARCH & GLM_ARCH_SSE2))
+#	error "SSE2 instructions not supported or enabled"
+#else
 
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
+#include "intrinsic_common.hpp"
 
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
+namespace glm{
+namespace detail
+{
+	//length
+	__m128 sse_len_ps(__m128 x);
 
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
+	//distance
+	__m128 sse_dst_ps(__m128 p0, __m128 p1);
 
+	//dot
+	__m128 sse_dot_ps(__m128 v1, __m128 v2);
+
+	// SSE1
+	__m128 sse_dot_ss(__m128 v1, __m128 v2);
+
+	//cross
+	__m128 sse_xpd_ps(__m128 v1, __m128 v2);
+
+	//normalize
+	__m128 sse_nrm_ps(__m128 v);
+
+	//faceforward
+	__m128 sse_ffd_ps(__m128 N, __m128 I, __m128 Nref);
+
+	//reflect
+	__m128 sse_rfe_ps(__m128 I, __m128 N);
+
+	//refract
+	__m128 sse_rfa_ps(__m128 I, __m128 N, __m128 eta);
+
+}//namespace detail
+}//namespace glm
+
+#include "intrinsic_geometric.inl"
+
+#endif//GLM_ARCH

@@ -25,35 +25,24 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/type_half.hpp
+/// @date 2008-08-17 / 2011-09-20
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
+#pragma once
 
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
+#include "setup.hpp"
 
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
+namespace glm{
+namespace detail
+{
+	typedef short hdata;
 
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
+	GLM_FUNC_DECL float toFloat32(hdata value);
+	GLM_FUNC_DECL hdata toFloat16(float const & value);
 
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
+}//namespace detail
+}//namespace glm
 
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
-
+#include "type_half.inl"

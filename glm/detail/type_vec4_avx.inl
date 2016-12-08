@@ -25,35 +25,17 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/type_tvec4_avx.inl
+/// @date 2014-12-01 / 2014-12-01
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
+namespace glm{
+namespace detail
+{
 
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
+}//namespace detail
 
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
+	
 
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
-
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
-
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
-
+}//namespace glm

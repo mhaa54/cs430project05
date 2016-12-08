@@ -8,10 +8,10 @@
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-/// 
+///
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-/// 
+///
 /// Restrictions:
 ///		By making use of the Software for military purposes, you choose to make
 ///		a Bunny unhappy.
@@ -25,35 +25,20 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/precision.hpp
+/// @date 2013-04-01 / 2013-04-01
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
+#pragma once
 
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
-
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
-
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
-
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
-
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
-
+namespace glm
+{
+	enum precision
+	{
+		highp,
+		mediump,
+		lowp,
+		defaultp = highp
+	};
+}//namespace glm

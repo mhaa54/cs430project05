@@ -12,10 +12,6 @@
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
 /// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
-/// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,35 +21,7 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/intrinsic_trigonometric.inl
+/// @date 2011-06-15 / 2011-06-15
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
-
-#include <cmath>
-
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
-
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
-
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
-
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
-
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
-

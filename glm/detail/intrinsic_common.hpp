@@ -12,10 +12,6 @@
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
 /// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
-/// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,35 +21,67 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/intrinsic_common.hpp
+/// @date 2009-05-11 / 2011-06-15
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
+#pragma once
 
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
+#include "setup.hpp"
 
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
+#if(!(GLM_ARCH & GLM_ARCH_SSE2))
+#	error "SSE2 instructions not supported or enabled"
+#else
 
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
+namespace glm{
+namespace detail
+{
+	__m128 sse_abs_ps(__m128 x);
 
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
+	__m128 sse_sgn_ps(__m128 x);
 
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
+	//floor
+	__m128 sse_flr_ps(__m128 v);
 
+	//trunc
+	__m128 sse_trc_ps(__m128 v);
+
+	//round
+	__m128 sse_nd_ps(__m128 v);
+
+	//roundEven
+	__m128 sse_rde_ps(__m128 v);
+
+	__m128 sse_rnd_ps(__m128 x);
+
+	__m128 sse_ceil_ps(__m128 v);
+
+	__m128 sse_frc_ps(__m128 x);
+
+	__m128 sse_mod_ps(__m128 x, __m128 y);
+
+	__m128 sse_modf_ps(__m128 x, __m128i & i);
+
+	//GLM_FUNC_QUALIFIER __m128 sse_min_ps(__m128 x, __m128 y)
+
+	//GLM_FUNC_QUALIFIER __m128 sse_max_ps(__m128 x, __m128 y)
+
+	__m128 sse_clp_ps(__m128 v, __m128 minVal, __m128 maxVal);
+
+	__m128 sse_mix_ps(__m128 v1, __m128 v2, __m128 a);
+
+	__m128 sse_stp_ps(__m128 edge, __m128 x);
+
+	__m128 sse_ssp_ps(__m128 edge0, __m128 edge1, __m128 x);
+
+	__m128 sse_nan_ps(__m128 x);
+
+	__m128 sse_inf_ps(__m128 x);
+
+}//namespace detail
+}//namespace glm
+
+#include "intrinsic_common.inl"
+
+#endif//GLM_ARCH

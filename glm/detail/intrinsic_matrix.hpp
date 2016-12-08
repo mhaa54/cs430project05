@@ -12,10 +12,6 @@
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
 /// 
-/// Restrictions:
-///		By making use of the Software for military purposes, you choose to make
-///		a Bunny unhappy.
-/// 
 /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 /// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 /// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -25,35 +21,47 @@
 /// THE SOFTWARE.
 ///
 /// @ref core
-/// @file glm/detail/_fixes.hpp
-/// @date 2011-02-21 / 2011-11-22
+/// @file glm/detail/intrinsic_common.hpp
+/// @date 2009-06-05 / 2011-06-15
 /// @author Christophe Riccio
 ///////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
+#pragma once
 
-//! Workaround for compatibility with other libraries
-#ifdef max
-#undef max
-#endif
+#include "setup.hpp"
 
-//! Workaround for compatibility with other libraries
-#ifdef min
-#undef min
-#endif
+#if(!(GLM_ARCH & GLM_ARCH_SSE2))
+#	error "SSE2 instructions not supported or enabled"
+#else
 
-//! Workaround for Android
-#ifdef isnan
-#undef isnan
-#endif
+#include "intrinsic_geometric.hpp"
 
-//! Workaround for Android
-#ifdef isinf
-#undef isinf
-#endif
+namespace glm{
+namespace detail
+{
+	void sse_add_ps(__m128 in1[4], __m128 in2[4], __m128 out[4]);
 
-//! Workaround for Chrone Native Client
-#ifdef log2
-#undef log2
-#endif
+	void sse_sub_ps(__m128 in1[4], __m128 in2[4], __m128 out[4]);
 
+	__m128 sse_mul_ps(__m128 m[4], __m128 v);
+
+	__m128 sse_mul_ps(__m128 v, __m128 m[4]);
+
+	void sse_mul_ps(__m128 const in1[4], __m128 const in2[4], __m128 out[4]);
+
+	void sse_transpose_ps(__m128 const in[4], __m128 out[4]);
+
+	void sse_inverse_ps(__m128 const in[4], __m128 out[4]);
+
+	void sse_rotate_ps(__m128 const in[4], float Angle, float const v[3], __m128 out[4]);
+
+	__m128 sse_det_ps(__m128 const m[4]);
+
+	__m128 sse_slow_det_ps(__m128 const m[4]);
+
+}//namespace detail
+}//namespace glm
+
+#include "intrinsic_matrix.inl"
+
+#endif//GLM_ARCH
