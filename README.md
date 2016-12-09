@@ -16,3 +16,8 @@ The project was built on Windows 10 using Visual Studio 2015 Community Edition w
 
 # How to use the application
 
+For rotate and zoom
+
+press X,Y or left control to do
+
+Shear X, shear Y and Translate with left mouse
